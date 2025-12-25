@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>For My Bestie 🌸</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    overflow: hidden; /* locked initially */
+  }
+
+  .section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .fade {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: all 1.2s ease;
+  }
+
+  .fade.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .count-box {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 1.5rem;
+    padding: 2rem;
+  }
+
+  .time {
+    font-size: 2.5rem;
+    font-weight: 800;
+  }
+
+  .year {
+    font-size: 4.5rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+  }
+</style>
+</head>
+
+<body class="bg-gradient-to-br from-pink-100 via-rose-100 to-purple-100 text-gray-700">
+
+<!-- COUNTDOWN SECTION -->
+<section class="section" id="countdown-section">
+  <img
+    src="https://media.giphy.com/media/v6aOjy0Qo1fIA/giphy.gif"
+    class="w-56 mb-6 float"
+  />
+
+  <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+    Almost Time 🌸
+  </h1>
+
+  <p class="mb-6 text-lg">
+    Something sweet unlocks at midnight.
+  </p>
+
+  <div class="count-box">
+    <div class="grid grid-cols-4 gap-4 text-center">
+      <div>
+        <div class="time" id="days">00</div>
+        <p class="text-sm">Days</p>
+      </div>
+      <div>
+        <div class="time" id="hours">00</div>
+        <p class="text-sm">Hours</p>
+      </div>
+      <div>
+        <div class="time" id="minutes">00</div>
+        <p class="text-sm">Minutes</p>
+      </div>
+      <div>
+        <div class="time" id="seconds">00</div>
+        <p class="text-sm">Seconds</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="mt-6 text-sm opacity-60">
+    Waiting for 12:00 AM IST ✨
+  </p>
+</section>
+
+<!-- CONTENT STARTS -->
+<div id="content" class="hidden">
+
+  <!-- SECTION 1 -->
+  <section class="section">
+    <h1 class="text-4xl md:text-5xl font-extrabold fade">
+      Hi Princess 🌷
+    </h1>
+    <p class="mt-4 text-lg fade">
+      This is something soft, cozy, and just for you.
+    </p>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="section bg-white/60 backdrop-blur-md">
+    <img
+      src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif"
+      class="w-48 mb-6 fade"
+    />
+    <h2 class="text-3xl font-semibold fade">2025 Felt Like…</h2>
+    <p class="mt-4 max-w-xl fade">
+      A mix of chaos, comfort, laughter, and quiet moments —
+      made easier because you were there.
+    </p>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="section">
+    <img
+      src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+      class="w-52 mb-6 fade float"
+    />
+    <h2 class="text-3xl font-semibold fade">Best Moments of Us 🐱</h2>
+    <p class="mt-4 max-w-xl fade">
+      Random talks.  
+      Being silly.  
+      Being calm together.
+    </p>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="section bg-white/60 backdrop-blur-md">
+    <h2 class="text-3xl font-semibold fade">Thank You 🤍</h2>
+    <p class="mt-4 max-w-xl fade">
+      For being kind.  
+      For being steady.  
+      For being you.
+    </p>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="section" id="year-section">
+    <div class="year text-purple-600" id="yearText">2025</div>
+    <p class="mt-6 max-w-xl fade">
+      Turning the page — softly.
+    </p>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section class="section bg-white/70 backdrop-blur-lg">
+    <img
+      src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
+      class="w-56 mb-6 fade float"
+    />
+    <h2 class="text-4xl font-extrabold fade">Happy New Year ✨</h2>
+    <p class="mt-4 max-w-xl fade">
+      Thanks for being part of my 2025  
+      and stepping into 2026 with me.
+    </p>
+  </section>
+
+  <section class="section bg-white/70 backdrop-blur-lg">
+    <h2 class="text-4xl font-extrabold fade">Oh forgot a thing for you.</h2>
+    <p class="mt-4 max-w-xl fade">
+      A RIBBON 🎀 🎀 
+      FROM YOUR BESTIE, V
+    </p>
+  </section>
+
+</div>
+
+<script>
+  const target = new Date("2026-01-01T00:00:00+05:30").getTime();
+
+  const daysEl = document.getElementById("days");
+  const hoursEl = document.getElementById("hours");
+  const minsEl = document.getElementById("minutes");
+  const secsEl = document.getElementById("seconds");
+
+  const content = document.getElementById("content");
+
+  const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      clearInterval(timer);
+      document.body.style.overflow = "auto";
+      document.getElementById("countdown-section").style.display = "none";
+      content.classList.remove("hidden");
+      startObservers();
+      startYearAnimation();
+      return;
+    }
+
+    daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+    hoursEl.textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    minsEl.textContent = Math.floor((diff / (1000 * 60)) % 60);
+    secsEl.textContent = Math.floor((diff / 1000) % 60);
+  }, 1000);
+
+  function startObservers() {
+    const fades = document.querySelectorAll('.fade');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('show');
+      });
+    }, { threshold: 0.3 });
+    fades.forEach(f => obs.observe(f));
+  }
+
+  function startYearAnimation() {
+    const yearText = document.getElementById("yearText");
+    setTimeout(() => yearText.textContent = "202", 600);
+    setTimeout(() => yearText.textContent = "2026", 1200);
+  }
+</script>
+
+</body>
+  </html>
