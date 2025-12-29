@@ -6,238 +6,296 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.tailwindcss.com"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-  body {
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
-    overflow: hidden; /* locked initially */
-  }
+body {
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
 
-  .section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem;
-  }
+/* sections */
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+}
 
-  .fade {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: all 1.2s ease;
-  }
+/* fade animation */
+.fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 1.2s ease;
+}
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  .fade.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* wrapped background */
+.wrapped-bg {
+  background: linear-gradient(120deg, #fce7f3, #ede9fe, #fdf2f8);
+  background-size: 200% 200%;
+  animation: gradientMove 12s ease infinite;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  .float {
-    animation: float 3s ease-in-out infinite;
-  }
+/* cards */
+.card {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(14px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
 
-  @keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
+/* countdown */
+.count-box {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(14px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+}
+.time {
+  font-size: 2.2rem;
+  font-weight: 800;
+}
 
-  .count-box {
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(12px);
-    border-radius: 1.5rem;
-    padding: 2rem;
-  }
+/* floating hearts */
+.heart {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  background: #fb7185;
+  transform: rotate(45deg);
+  animation: floatUp linear infinite;
+  opacity: 0.35;
+  z-index: 0;
+}
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #fb7185;
+  border-radius: 50%;
+}
+.heart::before { top: -7px; left: 0; }
+.heart::after { left: -7px; top: 0; }
 
-  .time {
-    font-size: 2.5rem;
-    font-weight: 800;
-  }
-
-  .year {
-    font-size: 4.5rem;
-    font-weight: 800;
-    letter-spacing: 4px;
-  }
+@keyframes floatUp {
+  from { transform: translateY(0) rotate(45deg); opacity: 0; }
+  20% { opacity: 0.35; }
+  to { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+}
 </style>
 </head>
 
 <body class="bg-gradient-to-br from-pink-100 via-rose-100 to-purple-100 text-gray-700">
 
-<!-- COUNTDOWN SECTION -->
+<!-- COUNTDOWN -->
 <section class="section" id="countdown-section">
-  <img
-    src="https://media.giphy.com/media/v6aOjy0Qo1fIA/giphy.gif"
-    class="w-56 mb-6 float"
-  />
-
-  <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
-    Almost Time 🌸
-  </h1>
-
-  <p class="mb-6 text-lg">
-    Something sweet unlocks at midnight.
-  </p>
+  <img src="https://media.giphy.com/media/KztT2c4u8mYYUiMKdJ/giphy.gif" class="w-48 mb-6" />
+  <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Almost Time 🌸</h1>
+  <p class="mb-6 text-lg">Something sweet unlocks at midnight.</p>
 
   <div class="count-box">
-    <div class="grid grid-cols-4 gap-4 text-center">
-      <div>
-        <div class="time" id="days">00</div>
-        <p class="text-sm">Days</p>
-      </div>
-      <div>
-        <div class="time" id="hours">00</div>
-        <p class="text-sm">Hours</p>
-      </div>
-      <div>
-        <div class="time" id="minutes">00</div>
-        <p class="text-sm">Minutes</p>
-      </div>
-      <div>
-        <div class="time" id="seconds">00</div>
-        <p class="text-sm">Seconds</p>
-      </div>
+    <div class="grid grid-cols-4 gap-4">
+      <div><div class="time" id="days">00</div><p>Days</p></div>
+      <div><div class="time" id="hours">00</div><p>Hours</p></div>
+      <div><div class="time" id="minutes">00</div><p>Minutes</p></div>
+      <div><div class="time" id="seconds">00</div><p>Seconds</p></div>
     </div>
   </div>
 
-  <p class="mt-6 text-sm opacity-60">
-    Waiting for 12:00 AM IST ✨
-  </p>
+  <p class="mt-6 text-sm opacity-60">Waiting for 12:00 AM IST ✨</p>
 </section>
 
-<!-- CONTENT STARTS -->
-<div id="content" class="hidden">
+<!-- CONTENT -->
+<div id="content" class="hidden relative z-10">
 
-  <!-- SECTION 1 -->
-  <section class="section">
-    <h1 class="text-4xl md:text-5xl font-extrabold fade">
-      Hi Princess 🌷
+  <!-- WRAPPED INTRO -->
+  <section class="section wrapped-bg">
+    <h1 class="text-5xl md:text-6xl font-extrabold fade">
+      Your 2025 Wrapped
     </h1>
-    <p class="mt-4 text-lg fade">
-      This is something soft, cozy, and just for you.
+    <p class="mt-6 text-lg fade opacity-80">
+      Soft moments, comfort talks, and quiet happiness.
     </p>
   </section>
 
-  <!-- SECTION 2 -->
-  <section class="section bg-white/60 backdrop-blur-md">
-    <img
-      src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif"
-      class="w-48 mb-6 fade"
-    />
-    <h2 class="text-3xl font-semibold fade">2025 Felt Like…</h2>
-    <p class="mt-4 max-w-xl fade">
-      A mix of chaos, comfort, laughter, and quiet moments —
-      made easier because you were there.
-    </p>
-  </section>
-
-  <!-- SECTION 3 -->
+  <!-- STATS -->
   <section class="section">
-    <img
-      src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
-      class="w-52 mb-6 fade float"
-    />
-    <h2 class="text-3xl font-semibold fade">Best Moments of Us 🐱</h2>
-    <p class="mt-4 max-w-xl fade">
-      Random talks.  
-      Being silly.  
-      Being calm together.
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl w-full">
+      <div class="card fade">
+        <h3 class="text-lg font-semibold">Late Night Talks</h3>
+        <p class="text-5xl font-extrabold mt-4 text-rose-500">∞</p>
+      </div>
+      <div class="card fade">
+        <h3 class="text-lg font-semibold">Shared Smiles</h3>
+        <p class="text-5xl font-extrabold mt-4 text-purple-500">100%</p>
+      </div>
+      <div class="card fade">
+        <h3 class="text-lg font-semibold">Comfort Level</h3>
+        <p class="text-5xl font-extrabold mt-4 text-pink-500">MAX</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HELLO YOU -->
+  <section class="section bg-white/70 backdrop-blur-lg">
+    <p class="text-sm uppercase tracking-widest opacity-50 fade">
+      Introducing
+    </p>
+    <h1 class="text-4xl md:text-5xl font-extrabold mt-6 fade">
+      you 🌷
+    </h1>
+    <p class="mt-6 max-w-xl text-lg fade opacity-80">
+      The one who made 2025 kinder 
+      in all the ways that mattered
     </p>
   </section>
 
-  <!-- SECTION 4 -->
   <section class="section bg-white/60 backdrop-blur-md">
-    <h2 class="text-3xl font-semibold fade">Thank You 🤍</h2>
-    <p class="mt-4 max-w-xl fade">
-      For being kind.  
-      For being steady.  
-      For being you.
+    <h2 class="text-3xl font-semibold fade mb-8">
+      Moments That Stayed 🐾
+    </h2>
+
+    <!-- FRAME -->
+    <div class="relative w-full max-w-md overflow-hidden rounded-2xl shadow-xl bg-white">
+      <div
+        id="momentSlider"
+        class="flex transition-transform duration-700 ease-in-out"
+      >
+        <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/Df0JB6yixeNqg/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/12MY94aT1qTFjW/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/C7Gj216EwEi4/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/Zl7u48zLVFgLpRwq6f/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/gXXFrjHFJIMoqKr8UT/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/SILTTnZ7qHX2Y6Oqtm/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/d8R5HipWkYcNJAnGX9/giphy.gif" class="w-full flex-shrink-0 object-cover">
+        <img src="https://media.giphy.com/media/kZqbBT64ECtjy/giphy.gif" class="w-full flex-shrink-0 object-cover">
+      </div>
+    </div>
+
+    <p class="mt-6 text-sm opacity-60 fade">
+      Some things just stay.
     </p>
   </section>
 
-  <!-- SECTION 5 -->
-  <section class="section" id="year-section">
-    <div class="year text-purple-600" id="yearText">2025</div>
-    <p class="mt-6 max-w-xl fade">
-      Turning the page — softly.
+
+  <!-- 2026 -->
+  <section class="section">
+    <img src="https://media.giphy.com/media/901mxGLGQN2PyCQpoc/giphy.gif" class="w-48 mb-6 fade">
+    <h2 class="text-4xl font-extrabold fade">
+      Moving into 2026 with you pretty ✨
+    </h2>
+    <p class="mt-6 max-w-xl fade text-lg">
+      Nothing loud. 
+      Just calm, comfort, and us.
     </p>
   </section>
 
-  <!-- SECTION 6 -->
-  <section class="section bg-white/70 backdrop-blur-lg">
-    <img
-      src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
-      class="w-56 mb-6 fade float"
-    />
-    <h2 class="text-4xl font-extrabold fade">Happy New Year ✨</h2>
-    <p class="mt-4 max-w-xl fade">
-      Thanks for being part of my 2025  
-      and stepping into 2026 with me.
-
-      now keep scrolling.🤭
+  <!-- FINAL -->
+  <section class="section bg-white/80 backdrop-blur-lg">
+    <h2 class="text-3xl md:text-4xl font-extrabold fade">
+      Oh, almost forgot…
+    </h2>
+    <p class="mt-6 text-xl fade">
+      A ribbon for you 🎀
     </p>
-  </section>
+    <p class="mt-10 text-sm opacity-60 fade">
+      From your bestie, V ❤️
 
-  <section class="section bg-white/70 backdrop-blur-lg">
-    <h2 class="text-4xl font-extrabold fade">Oh forgot a thing for you.</h2>
-    <p class="mt-4 max-w-xl fade">
-      A RIBBON 🎀
-      .FROM YOUR BESTIE, V
     </p>
   </section>
 
 </div>
 
 <script>
-  const target = new Date("2026-01-01T00:00:00+05:30").getTime();
+const target = new Date("2026-01-01T00:00:00+05:30").getTime();
 
-  const daysEl = document.getElementById("days");
-  const hoursEl = document.getElementById("hours");
-  const minsEl = document.getElementById("minutes");
-  const secsEl = document.getElementById("seconds");
+const daysEl = document.getElementById("days");
+const hoursEl = document.getElementById("hours");
+const minsEl = document.getElementById("minutes");
+const secsEl = document.getElementById("seconds");
+const content = document.getElementById("content");
 
-  const content = document.getElementById("content");
+const timer = setInterval(() => {
+  const diff = target - Date.now();
 
-  const timer = setInterval(() => {
-    const now = new Date().getTime();
-    const diff = target - now;
-
-    if (diff <= 0) {
-      clearInterval(timer);
-      document.body.style.overflow = "auto";
-      document.getElementById("countdown-section").style.display = "none";
-      content.classList.remove("hidden");
-      startObservers();
-      startYearAnimation();
-      return;
-    }
-
-    daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
-    hoursEl.textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    minsEl.textContent = Math.floor((diff / (1000 * 60)) % 60);
-    secsEl.textContent = Math.floor((diff / 1000) % 60);
-  }, 1000);
-
-  function startObservers() {
-    const fades = document.querySelectorAll('.fade');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('show');
-      });
-    }, { threshold: 0.3 });
-    fades.forEach(f => obs.observe(f));
+  if (diff <= 0) {
+    clearInterval(timer);
+    document.body.style.overflow = "auto";
+    document.getElementById("countdown-section").style.display = "none";
+    content.classList.remove("hidden");
+    startObservers();
+    startHearts();
+    return;
   }
 
-  function startYearAnimation() {
-    const yearText = document.getElementById("yearText");
-    setTimeout(() => yearText.textContent = "202", 600);
-    setTimeout(() => yearText.textContent = "2026", 1200);
-  }
+  daysEl.textContent = Math.floor(diff / 86400000);
+  hoursEl.textContent = Math.floor(diff / 3600000) % 24;
+  minsEl.textContent = Math.floor(diff / 60000) % 60;
+  secsEl.textContent = Math.floor(diff / 1000) % 60;
+}, 1000);
+
+function startObservers() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting && e.target.classList.add("show"));
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll(".fade").forEach(el => obs.observe(el));
+}
+
+function startHearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.bottom = "-20px";
+    h.style.animationDuration = 4 + Math.random() * 4 + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 8000);
+  }, 900);
+}
+
+// 🎞️ Auto swipe banner (Spotify-style)
+const slider = document.getElementById("momentSlider");
+let slideIndex = 0;
+let slideCount = slider.children.length;
+let sliderInterval;
+
+function startSlider() {
+  sliderInterval = setInterval(() => {
+    slideIndex = (slideIndex + 1) % slideCount;
+    slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+  }, 2000);
+}
+
+function stopSlider() {
+  clearInterval(sliderInterval);
+}
+
+startSlider();
+
+// pause on hover (desktop)
+slider.parentElement.addEventListener("mouseenter", stopSlider);
+slider.parentElement.addEventListener("mouseleave", startSlider);
+
 </script>
 
 </body>
-  </html>
+</html>
